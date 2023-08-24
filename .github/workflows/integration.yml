@@ -9,7 +9,7 @@ jobs:
         id: selftest
 
         # Put your action repo here
-        uses: supatsara-wat/test-github-action@master
+        uses: supatsara-wat/test-github-action@dev
 
       - name: Check outputs
         run: |

@@ -2,7 +2,6 @@ name: Detect and Alert on Package.json Changes
 on:
   pull_request:
     types:
-      - opened
       - synchronize
 
 jobs:
@@ -13,6 +12,11 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
       - name: Run Python script
         run: python .github/scripts/detect_package_changes.py
 
@@ -21,12 +25,5 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            if (process.env.PACKAGE_JSON_CHANGED === 'true') {
-              const message = "Changes detected in package.json.";
-              github.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: message
-              });
-            }
+            if os.environ.get("PACKAGE_JSON_CHANGED") == "true":
+                message = "Changes detected in package.json."

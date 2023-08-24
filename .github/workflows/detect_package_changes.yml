@@ -14,6 +14,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Python script
+        id: run_process
         run: python .github/scripts/detect_package_changes.py
 
       - name: Comment on PR if package.json changed
@@ -21,7 +22,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            if (process.env.PACKAGE_JSON_CHANGED === 'true') {
+            if (steps.selftest.outputs.PACKAGE_JSON_CHANGED === 'true') {
               const message = "Changes detected in package.json.";
               github.issues.createComment({
                 issue_number: context.issue.number,

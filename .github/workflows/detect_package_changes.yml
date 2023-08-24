@@ -22,7 +22,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            if (steps.selftest.outputs.PACKAGE_JSON_CHANGED === 'true') {
+            if (run_process.selftest.outputs.PACKAGE_JSON_CHANGED === 'true') {
               const message = "Changes detected in package.json.";
               github.issues.createComment({
                 issue_number: context.issue.number,

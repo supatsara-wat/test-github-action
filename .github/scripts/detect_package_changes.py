@@ -6,4 +6,4 @@ changed_files = os.popen(
 if "package.json" in changed_files:
     print("::set-output name=PACKAGE_JSON_CHANGED::true")
 else:
-    print("::set-output name=PACKAGE_JSON_CHANGED::false")
+    print("::set-output name=PACKAGE_JSON_CHANGED::true")

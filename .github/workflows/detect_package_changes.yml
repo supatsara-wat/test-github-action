@@ -27,9 +27,3 @@ jobs:
           script: |
             if os.environ.get("PACKAGE_JSON_CHANGED") == "true":
                 message = "Changes detected in package.json."
-                github.issues.createComment({
-                  issue_number: context.issue.number,
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  body: message
-                })
